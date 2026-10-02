@@ -2,6 +2,10 @@ import { Component, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
 // Import from the dedicated signals submodule
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
+import { AuthService } from '../../auth/service/AuthService';
+import { FormGroup } from '@angular/forms';
+import { TokenService } from '../../auth/service/TokenService';
+import { map } from 'rxjs';
 
 interface LoginData {
   email: string;
@@ -11,13 +15,14 @@ interface LoginData {
 @Component({
   selector: 'app-login-comp',
   standalone: true,
-  // FormField directive binds your fields to HTML elements natively
   imports: [FormField],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   private readonly router = inject(Router);
+  private readonly authService: AuthService = inject(AuthService);
+  private readonly tokenService: TokenService = inject(TokenService);
 
   // 1. Establish the source of truth as a Writable Signal model
   loginModel = signal<LoginData>({
@@ -37,7 +42,7 @@ export class LoginComponent {
   isLoading = signal(false);
   errorMessage = signal('');
 
-  onSubmit(event: Event) {
+  async onSubmit(event: Event) {
     event.preventDefault();
 
     // The entire form status is reactive
@@ -51,15 +56,20 @@ export class LoginComponent {
 
     // Extract the raw, type-safe data by evaluating the model signal
     const credentials = this.loginModel();
+    // call token endpoint
+    this.tokenService.login(credentials.email, credentials.password).pipe(
+      map(response => response? this.loginSuccess(response): this.loginFailure()),
+    );
+  }
 
-    setTimeout(() => {
-      this.isLoading.set(false);
+  loginSuccess(token: string){
+    this.authService.setToken(token);
+    this.router.navigate(['/Home']).then(r => console.log("login success",r));
 
-      if (credentials.email === 'user@example.com' && credentials.password === 'password123') {
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.errorMessage.set('Invalid email or password.');
-      }
-    }, 1500);
+  }
+
+  loginFailure(){
+
+    this.router.navigate(['/Login']).then(r => console.error("login failed", r));
   }
 }
