@@ -9,7 +9,7 @@ interface LoginData {
 }
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-comp',
   standalone: true,
   // FormField directive binds your fields to HTML elements natively
   imports: [FormField],
