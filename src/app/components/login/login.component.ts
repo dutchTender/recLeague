@@ -50,7 +50,7 @@ export class LoginComponent {
     const credentials = this.loginModel();
     // call token endpoint
     this.tokenService.login(credentials.email, credentials.password).pipe(
-      map(response => response? this.loginSuccess(response): this.loginFailure()),
+      map(response => response ? this.loginSuccess(response) : this.loginFailure()),
     );
   }
 
