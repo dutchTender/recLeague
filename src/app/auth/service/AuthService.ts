@@ -15,6 +15,8 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (!token) return false;
+    // add jose verify check.  we need to get the server jwk
+    // meaning the server needs a jwk endpoint
     // Optional: check local expiration timestamp from payload
     return true;
   }

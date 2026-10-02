@@ -1,1 +1,12 @@
-<p>home-page works!</p>
+
+@if(isAdmin()){
+<app-admin-home></app-admin-home>
+}
+@else{
+  <app-user-home></app-user-home>
+}
+
+
+
+
+
