@@ -1,0 +1,60 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Please enter your credentials to sign in</p>
+
+    <!-- Error Alert -->
+    @if (errorMessage()) {
+      <div class="alert error-alert">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form (submit)="onSubmit($event)">
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          [formField]="loginForm.email"
+          placeholder="you@example.com"
+          autocomplete="email"
+        />
+        <!-- Error tracking using the field state signals -->
+        @if (loginForm.email().dirty() && loginForm.email().invalid()) {
+          @for (error of loginForm.email().errors(); track error) {
+            <span class="error-text">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          [formField]="loginForm.password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+        />
+        @if (loginForm.password().dirty() && loginForm.password().invalid()) {
+          @for (error of loginForm.password().errors(); track error) {
+            <span class="error-text">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="loginForm().invalid() || isLoading()" class="btn-submit">
+        @if (isLoading()) {
+          <span>Signing in...</span>
+        } @else {
+          <span>Sign In</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>
+
