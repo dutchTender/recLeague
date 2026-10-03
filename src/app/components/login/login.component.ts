@@ -49,9 +49,11 @@ export class LoginComponent {
     // Extract the raw, type-safe data by evaluating the model signal
     const credentials = this.loginModel();
     // call token endpoint
-    this.tokenService.login(credentials.email, credentials.password).pipe(
-      map(response => response ? this.loginSuccess(response) : this.loginFailure()),
-    );
+    console.log("cred check : "+JSON.stringify(credentials));
+    const token = await this.tokenService.login(credentials.email, credentials.password);
+
+
+    this.authService.setToken(token);
   }
 
   loginSuccess(token: string){
