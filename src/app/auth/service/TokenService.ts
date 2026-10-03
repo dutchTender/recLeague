@@ -26,8 +26,10 @@ export class TokenService {
     } catch (error: any) {
       console.error('Request failed:', error);
       // Throw the error or handle it based on your app's global error policy
-      throw new Error(error.message || 'Login failed');
+      return(error as APIResponse);
     }
+
+
 
 
   }

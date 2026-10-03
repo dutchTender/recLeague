@@ -49,7 +49,7 @@ export class LoginComponent {
     console.log("cred check : "+JSON.stringify(credentials));
     const response: APIResponse = await this.tokenService.login(credentials.email, credentials.password);
     console.log('Server response:', JSON.stringify(response));
-    this.authService.setToken(response.data);
+    response.status === 200 ? this.loginSuccess(response.data) : this.loginFailure();
   }
 
   loginSuccess(token: string){
@@ -60,6 +60,6 @@ export class LoginComponent {
 
   loginFailure(){
 
-  this.router.navigate(['/Login']).then(r => console.error("login failed", r));
+  this.router.navigate(['/']).then(r => console.error("login failed", r));
   }
 }

@@ -1,6 +1,6 @@
 export interface  APIResponse {
 
-code?: number;
+status?: number;
 data?: any;
 message?: string;
 metaData?: MetaData;
