@@ -12,6 +12,10 @@ export class AuthService {
   getToken(): string | null {
     return this.tokenSignal();
   }
+  removeToken(): void {
+    localStorage.removeItem('jwt');
+  }
+
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (!token) return false;
