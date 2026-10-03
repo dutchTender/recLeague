@@ -4,6 +4,7 @@ import { form, FormField, required, email, minLength } from '@angular/forms/sign
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
 import { map } from 'rxjs';
+import { APIResponse } from '../../model/model';
 
 interface LoginData {
   email: string;
@@ -50,10 +51,8 @@ export class LoginComponent {
     const credentials = this.loginModel();
     // call token endpoint
     console.log("cred check : "+JSON.stringify(credentials));
-    const token = await this.tokenService.login(credentials.email, credentials.password);
-
-
-    this.authService.setToken(token);
+    const response: APIResponse = await this.tokenService.login(credentials.email, credentials.password);
+    this.authService.setToken(response.data);
   }
 
   loginSuccess(token: string){
