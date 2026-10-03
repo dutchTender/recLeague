@@ -23,12 +23,11 @@ export class LoginComponent {
   private readonly authService: AuthService = inject(AuthService);
   private readonly tokenService: TokenService = inject(TokenService);
 
-  // 1. Establish the source of truth as a Writable Signal model
   loginModel = signal<LoginData>({
     email: '',
     password: '',
   });
-  // 2. Generate the form and define validation schemas in the callback
+
   loginForm = form(this.loginModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required.' });
     email(schemaPath.email, { message: 'Please enter a valid email address.' });
@@ -40,18 +39,16 @@ export class LoginComponent {
 
   async onSubmit(event: Event) {
     event.preventDefault();
-    // The entire form status is reactive
     if (this.loginForm().invalid()) {
       this.errorMessage.set('Please fix form errors before submitting.');
       return;
     }
     this.isLoading.set(true);
     this.errorMessage.set('');
-    // Extract the raw, type-safe data by evaluating the model signal
     const credentials = this.loginModel();
-    // call token endpoint
     console.log("cred check : "+JSON.stringify(credentials));
     const response: APIResponse = await this.tokenService.login(credentials.email, credentials.password);
+    console.log('Server response:', JSON.stringify(response));
     this.authService.setToken(response.data);
   }
 

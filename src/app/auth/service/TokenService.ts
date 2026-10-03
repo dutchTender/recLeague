@@ -22,8 +22,6 @@ export class TokenService {
           { headers: headers, responseType: 'text' as 'json' },
         ),
       );
-
-      console.log('Server response:', JSON.stringify(response));
       return response;
     } catch (error: any) {
       console.error('Request failed:', error);
