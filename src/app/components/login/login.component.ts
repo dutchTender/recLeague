@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
-import { map } from 'rxjs';
-import { APIResponse } from '../../model/model';
+
 
 interface LoginData {
   email: string;
@@ -46,20 +45,20 @@ export class LoginComponent {
     this.isLoading.set(true);
     this.errorMessage.set('');
     const credentials = this.loginModel();
-    console.log("cred check : "+JSON.stringify(credentials));
-    const response: APIResponse = await this.tokenService.login(credentials.email, credentials.password);
-    console.log('Server response:', JSON.stringify(response));
-    response.status === 200 ? this.loginSuccess(response.data) : this.loginFailure();
+    console.log('cred check : ' + JSON.stringify(credentials));
+    const response: any = await this.tokenService.login(credentials.email, credentials.password);
+    JSON.parse(response).status === 200
+      ? await this.loginSuccess(JSON.parse(response).data)
+      : await this.loginFailure();
   }
 
-  loginSuccess(token: string){
+  async loginSuccess(token: string) {
     this.authService.setToken(token);
-    this.router.navigate(['/Home']).then(r => console.log("login success",r));
-
+    const navSuccess = await this.router.navigateByUrl('Home');
+    console.log(navSuccess);
   }
-
-  loginFailure(){
-
-  this.router.navigate(['/']).then(r => console.error("login failed", r));
+  async loginFailure() {
+    const navSuccess = await this.router.navigateByUrl('/');
+    console.log(navSuccess);
   }
 }

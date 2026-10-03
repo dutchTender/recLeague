@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { APIResponse } from '../../model/model';
 import { firstValueFrom } from 'rxjs';
+
 @Injectable({ providedIn: 'root' })
 export class TokenService {
   private readonly http = inject(HttpClient);
@@ -15,14 +16,14 @@ export class TokenService {
     });
     try {
       // Use firstValueFrom to convert the Observable to a Promise
-      const response = await firstValueFrom(
+
+      return await firstValueFrom(
         this.http.post<APIResponse>(
           'http://localhost:8080/auth',
           {},
           { headers: headers, responseType: 'text' as 'json' },
         ),
       );
-      return response;
     } catch (error: any) {
       console.error('Request failed:', error);
       // Throw the error or handle it based on your app's global error policy
