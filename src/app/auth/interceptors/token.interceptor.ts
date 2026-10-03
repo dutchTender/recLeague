@@ -5,9 +5,8 @@ import { AuthService } from '../service/AuthService';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
-  console.log('11111111111111111111111111111111111');
   const token = authService.getToken();
-
+  console.log(token);
   if (token) {
     // Clone the request and add the Authorization Bearer header
     const clonedReq = req.clone({
