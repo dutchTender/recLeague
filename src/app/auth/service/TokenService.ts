@@ -34,4 +34,25 @@ export class TokenService {
 
 
   }
+
+  async getJWKs(): Promise<APIResponse> {
+
+    /*auth headers with bearer token should be appended by token interceptor  */
+    try {
+      return await firstValueFrom(
+        this.http.get<APIResponse>(
+          'http://localhost:8080/.well-known/jwks.json',
+          {},
+        ),
+      );
+    } catch (error: any) {
+      console.error('Request failed:', error);
+      // Throw the error or handle it based on your app's global error policy
+      return(error as APIResponse);
+    }
+
+
+
+
+  }
 }
