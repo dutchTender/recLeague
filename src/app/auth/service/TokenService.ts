@@ -36,7 +36,6 @@ export class TokenService {
   }
 
   async getJWKs(): Promise<APIResponse> {
-
     /*auth headers with bearer token should be appended by token interceptor  */
     try {
       return await firstValueFrom(
@@ -50,9 +49,5 @@ export class TokenService {
       // Throw the error or handle it based on your app's global error policy
       return(error as APIResponse);
     }
-
-
-
-
   }
 }

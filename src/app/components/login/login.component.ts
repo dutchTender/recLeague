@@ -55,7 +55,10 @@ export class LoginComponent {
   async loginSuccess(token: string) {
     this.authService.setToken(token);
     // get public key - always get rsa pub key on user login. we will verify jwt client side
-
+    const pubKey = await this.tokenService.getJWKs();
+    console.log("jwk check : "+JSON.stringify(pubKey));
+    console.log("object check :"+JSON.stringify(pubKey.data?.keys[0]));
+    this.authService.setPubKey(pubKey.data?.keys[0]);
     const navSuccess = await this.router.navigateByUrl('Home');
     console.log(navSuccess);
   }
