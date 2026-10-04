@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 export class TokenService {
   private readonly http = inject(HttpClient);
 
-  async login(username: string, password: string): Promise<APIResponse> {
+  async getAccessToken(username: string, password: string): Promise<APIResponse> {
     // Combine credentials and encode them to Base64 using btoa()
     const encodedCredentials = btoa(`${username}:${password}`);
 

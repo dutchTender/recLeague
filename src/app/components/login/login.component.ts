@@ -46,7 +46,7 @@ export class LoginComponent {
     this.errorMessage.set('');
     const credentials = this.loginModel();
     console.log('cred check : ' + JSON.stringify(credentials));
-    const response: any = await this.tokenService.login(credentials.email, credentials.password);
+    const response: any = await this.tokenService.getAccessToken(credentials.email, credentials.password);
     JSON.parse(response).status === 200
       ? await this.loginSuccess(JSON.parse(response).data)
       : await this.loginFailure();
