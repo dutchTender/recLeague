@@ -54,10 +54,6 @@ export class LoginComponent {
         : await this.loginFailure();
     }
     catch (error : any){
-      this.loginForm().reset({
-        email:'',
-        password: ''
-      })
       await this.loginFailure();
     }
 
@@ -74,6 +70,10 @@ export class LoginComponent {
   }
   async loginFailure() {
     const navSuccess = await this.router.navigateByUrl('/');
+    this.loginForm().reset({
+      email:'',
+      password: ''
+    })
     this.errorMessage.set("User Authentication Failed....");
     this.isLoading.set(false);
     console.log(navSuccess);
