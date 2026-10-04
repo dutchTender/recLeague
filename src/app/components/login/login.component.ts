@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
-import { NgForm } from '@angular/forms';
+
 
 
 interface LoginData {
@@ -56,7 +56,6 @@ export class LoginComponent {
     catch (error : any){
       await this.loginFailure();
     }
-
   }
 
   async loginSuccess(token: string) {
