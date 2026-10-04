@@ -22,9 +22,11 @@ export class AuthService {
   }
   removeToken(): void {
     localStorage.removeItem('jwt');
+    this.tokenSignal.set(null)
   }
   removePubKey(): void {
     localStorage.removeItem('rsaPub');
+    this.pubKeySignal.set(null);
   }
 
   async isAuthenticated(): Promise<boolean> {

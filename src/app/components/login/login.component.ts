@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
+import { NgForm } from '@angular/forms';
 
 
 interface LoginData {
@@ -44,21 +45,34 @@ export class LoginComponent {
     }
     this.isLoading.set(true);
     this.errorMessage.set('');
+    this.authService.removeToken();
     const credentials = this.loginModel();
-    console.log('cred check : ' + JSON.stringify(credentials));
-    const response: any = await this.tokenService.getAccessToken(credentials.email, credentials.password);
-    JSON.parse(response).status === 200
-      ? await this.loginSuccess(JSON.parse(response).data)
-      : await this.loginFailure();
+    try{
+      const response: any = await this.tokenService.getAccessToken(credentials.email, credentials.password);
+      JSON.parse(response).status === 200
+        ? await this.loginSuccess(JSON.parse(response).data)
+        : await this.loginFailure();
+      console.log(JSON.stringify(response));
+    }
+    catch (error : any){
+      this.loginForm().reset({
+        email:'',
+        password: ''
+      })
+      this.errorMessage.set("User Authentication Failed....");
+      this.isLoading.set(false);
+    }
+
   }
 
   async loginSuccess(token: string) {
-    this.authService.setToken(token);
-    // get public key - always get rsa pub key on user login. we will verify jwt client side
-    const JWKs = await this.tokenService.getJWKs();
-    this.authService.setPubKey(JWKs.data?.keys[0]);
-    const navSuccess = await this.router.navigateByUrl('Home');
-    console.log(navSuccess);
+      this.authService.setToken(token);
+      // get public key - always get rsa pub key on user login. we will verify jwt client side
+      const JWKs = await this.tokenService.getJWKs();
+      this.authService.setPubKey(JWKs.data?.keys[0]);
+      const navSuccess = await this.router.navigateByUrl('Home');
+      console.log(navSuccess);
+
   }
   async loginFailure() {
     const navSuccess = await this.router.navigateByUrl('/');

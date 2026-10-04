@@ -46,6 +46,12 @@
         }
       </div>
 
+      @if (loginForm().errors().length > 0) {
+      <div class="error-banner">
+      {{ loginForm().errors()[0].message }}
+      </div>
+      }
+
       <!-- Submit Button -->
       <button type="submit" [disabled]="loginForm().invalid() || isLoading()" class="btn-submit">
         @if (isLoading()) {
