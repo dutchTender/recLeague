@@ -52,15 +52,13 @@ export class LoginComponent {
       JSON.parse(response).status === 200
         ? await this.loginSuccess(JSON.parse(response).data)
         : await this.loginFailure();
-      console.log(JSON.stringify(response));
     }
     catch (error : any){
       this.loginForm().reset({
         email:'',
         password: ''
       })
-      this.errorMessage.set("User Authentication Failed....");
-      this.isLoading.set(false);
+      await this.loginFailure();
     }
 
   }
@@ -76,6 +74,8 @@ export class LoginComponent {
   }
   async loginFailure() {
     const navSuccess = await this.router.navigateByUrl('/');
+    this.errorMessage.set("User Authentication Failed....");
+    this.isLoading.set(false);
     console.log(navSuccess);
   }
 }
