@@ -51,10 +51,10 @@ export class LoginComponent {
       const response: any = await this.tokenService.getAccessToken(credentials.email, credentials.password);
       JSON.parse(response).status === 200
         ? await this.loginSuccess(JSON.parse(response).data)
-        : await this.loginFailure();
+        : await this.loginFailure(JSON.parse(response).message);
     }
     catch (error : any){
-      await this.loginFailure();
+      await this.loginFailure(error);
     }
   }
 
@@ -67,13 +67,13 @@ export class LoginComponent {
       console.log(navSuccess);
 
   }
-  async loginFailure() {
+  async loginFailure(error:string) {
     const navSuccess = await this.router.navigateByUrl('/');
     this.loginForm().reset({
       email:'',
       password: ''
     })
-    this.errorMessage.set("User Authentication Failed....");
+    this.errorMessage.set("User Authentication Failed: "+JSON.stringify(error));
     this.isLoading.set(false);
     console.log(navSuccess);
   }
