@@ -1,2 +1,46 @@
-<a routerLink="/LogOut">Log Out</a>
-<p>user-home works!</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Home Dashboard</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<!-- The Grid Container -->
+<div class="homepage-container">
+
+  <header class="main-header">
+    <h1>Welcome Back, Alex!</h1>
+  </header>
+
+  <nav class="side-nav">
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Messages</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a routerLink="/LogOut">Log Out</a></li>
+    </ul>
+  </nav>
+
+  <main class="feed-content">
+    <h2>Your Activity Feed</h2>
+    <p>Recent updates from your network will appear here.</p>
+  </main>
+
+  <aside class="profile-widget">
+    <h3>Profile Status</h3>
+    <p>Level 5 Member</p>
+  </aside>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 Dashboard App</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
