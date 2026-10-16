@@ -79,9 +79,9 @@ export class LoginComponent {
     console.log(navSuccess);
   }
 
-   setCurrentUserFromJWT(token: string): void {
+  setCurrentUserFromJWT(token: string): void {
     const claims = this.parseJwtClaims(token);
-
+    console.log("jwt parse check : "+JSON.stringify(claims))
     if (claims) {
       // Handle scenario where scope might be a space-separated string "read write admin"
       // or already parsed as an array of strings
@@ -96,7 +96,8 @@ export class LoginComponent {
       });
     }
   }
-   parseJwtClaims(token: string): JwtClaims | null {
+
+  parseJwtClaims(token: string): JwtClaims | null {
     if (!token) return null;
 
     try {

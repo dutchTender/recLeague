@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, Signal, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { User } from '../../model/model';
 import { AuthService } from '../../auth/service/AuthService';
@@ -11,4 +11,9 @@ import { AuthService } from '../../auth/service/AuthService';
 })
 export class UserHome {
   private readonly authService  = inject(AuthService);
+  protected currentUser: Signal<User | null> = this.authService.currentUser;
+
+
+
+
 }

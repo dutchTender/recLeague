@@ -9,6 +9,8 @@ export class AuthService {
   private readonly pubKeySignal = signal<string | null>(localStorage.getItem('rsaPub'));
   private readonly currentUserSignal = signal<User | null>(null);
 
+  public readonly currentUser = this.currentUserSignal.asReadonly();
+
   setToken(token: string) {
     localStorage.setItem('jwt', token);
     this.tokenSignal.set(token);
