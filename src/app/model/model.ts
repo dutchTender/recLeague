@@ -1,5 +1,4 @@
 export interface  APIResponse {
-
 status?: number;
 data?: any;
 message?: string;
@@ -7,8 +6,19 @@ metaData?: MetaData;
 
 }
 
-
-export interface  MetaData {
+export interface MetaData {
   stats: string;
   uri: string;
+}
+
+export interface User{
+  email: string;
+  userName: string;
+  roles: string[];
+}
+
+export interface JwtClaims {
+  sub: string;
+  scope: string; // Could be a space-separated string "read write" or an array depending on your auth server
+  [key: string]: any;
 }

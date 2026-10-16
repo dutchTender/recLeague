@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
+import { JwtClaims } from '../../model/model';
 
 
 
@@ -60,7 +61,7 @@ export class LoginComponent {
 
   async loginSuccess(token: string) {
       this.authService.setToken(token);
-      // get public key - always get rsa pub key on user login. we will verify jwt client side
+      this.setCurrentUserFromJWT(token);
       const JWKs = await this.tokenService.getJWKs();
       this.authService.setPubKey(JWKs.data?.keys[0]);
       const navSuccess = await this.router.navigateByUrl('Home');
@@ -77,4 +78,49 @@ export class LoginComponent {
     this.isLoading.set(false);
     console.log(navSuccess);
   }
+
+   setCurrentUserFromJWT(token: string): void {
+    const claims = this.parseJwtClaims(token);
+
+    if (claims) {
+      // Handle scenario where scope might be a space-separated string "read write admin"
+      // or already parsed as an array of strings
+      const extractedScopes = typeof claims['scope'] === 'string'
+        ? claims['scope'].split(' ')
+        : (claims['scope'] || []);
+
+      this.authService.setCurrentUser({
+        userName: claims.sub,
+        email: claims.sub,// The 'sub' attribute mapped to userId
+        roles: extractedScopes    // The 'scope' attribute mapped to an array
+      });
+    }
+  }
+   parseJwtClaims(token: string): JwtClaims | null {
+    if (!token) return null;
+
+    try {
+      // 1. Split the token and grab the payload (index 1)
+      const base64Url = token.split('.')[1];
+
+      // 2. Replace Base64URL characters back to standard Base64
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+      // 3. Decode the base64 string into a raw JSON string
+      const jsonPayload = decodeURIComponent(
+        window.atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+
+      // 4. Parse the string into a structured object
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('Invalid JWT Token structure', error);
+      return null;
+    }
+  }
+
+
 }
