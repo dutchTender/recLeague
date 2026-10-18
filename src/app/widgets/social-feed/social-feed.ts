@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { WidgetContent } from '../../common/model/model';
 
 @Component({
   selector: 'app-social-feed',
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './social-feed.html',
   styleUrl: './social-feed.css',
 })
-export class SocialFeed {}
+export class SocialFeed implements WidgetContent, OnInit{
+  actionType: string = '';
+  widgetName: string = '';
+
+  executeAction(): void {
+  }
+
+  ngOnInit(): void {
+  }
+}

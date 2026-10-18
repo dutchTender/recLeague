@@ -10,8 +10,8 @@ import { WidgetToken } from '../../model/model';
   styleUrl: './widget-wrapper.css',
 })
 export class WidgetWrapper implements OnInit{
-  protected title = input<string>('');
-  protected action = input<string>('')
+  title = input<string>('');
+  action = input<string>('')
   protected isLoading = signal<boolean>(false);
 
   widgetContent = contentChild(WidgetToken);

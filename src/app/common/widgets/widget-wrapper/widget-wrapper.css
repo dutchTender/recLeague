@@ -1,0 +1,14 @@
+.widget-header{
+  grid-area: feed;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+ .widget-footer{
+  grid-area: feed;
+  background-color: #ffffff;
+  padding: 20px;
+   border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}

@@ -25,7 +25,6 @@ export interface JwtClaims {
   [key: string]: any;
 }
 
-
 export interface WidgetContent {
      widgetName: string;
      actionType: string;
