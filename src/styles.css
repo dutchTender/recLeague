@@ -119,12 +119,18 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.profile-widget {
+.widget-panel {
   grid-area: widget;
   background-color: #e2e8f0;
   padding: 20px;
   border-radius: 8px;
 }
+.widget-panel-content {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
 
 .main-footer {
   grid-area: footer;
