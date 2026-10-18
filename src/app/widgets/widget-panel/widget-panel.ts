@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { WidgetContent } from '../../common/model/model';
 import { WidgetToken } from '../../common/model/InjectionToken';
 
@@ -18,6 +18,7 @@ export class WidgetPanel implements WidgetContent{
   widgetName = signal<string>('Widget Panel');
 
   executeAction(): void {
+    console.log("widget action executed.")
   }
 
 }

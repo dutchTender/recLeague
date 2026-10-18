@@ -77,7 +77,7 @@ body {
   padding: 20px;
 }
 
-/* 1. Define the Grid Container Layout Map */
+
 .homepage-container {
   display: grid;
   gap: 15px; /* Spacing between grid blocks */
@@ -94,7 +94,7 @@ body {
     "footer  footer  footer";
 }
 
-/* 2. Assign HTML Elements to the Named Areas */
+
 .main-header {
   grid-area: header;
   background-color: #1e293b;
@@ -139,7 +139,7 @@ body {
   color: #64748b;
 }
 
-/* 3. Responsive Redesign via Media Queries */
+
 @media (max-width: 900px) {
   .homepage-container {
     /* Collapse down to 2 columns for tablets */
@@ -165,4 +165,3 @@ body {
   }
 }
 
-/* You can add global styles to this file, and also import other style files */
