@@ -11,5 +11,5 @@ export const authGuard: CanActivateFn = async (route, state) => {
     return true; // Allow navigation to the route
   }
   // Redirect unauthenticated user to login
-  return router.navigateByUrl("/")
+  return router.navigate(['/']);
 };

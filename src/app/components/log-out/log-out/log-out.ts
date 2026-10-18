@@ -13,6 +13,7 @@ export class LogOut {
   private router: Router = inject(Router);
   async ngOnInit() {
     this.authService.removeToken();
+    this.authService.removePubKey();
     const navSuccess = await this.router.navigate(['/']);
     console.log(navSuccess);
   }

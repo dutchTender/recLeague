@@ -1,6 +1,5 @@
-// auth.service.ts
 import { Injectable, signal } from '@angular/core';
-import { importJWK, importSPKI, jwtVerify } from 'jose';
+import { importJWK, jwtVerify } from 'jose';
 import { User } from '../../common/model/model';
 
 
@@ -18,7 +17,6 @@ export class AuthService {
     this.tokenSignal.set(token);
   }
 
-  // 2. Accept either a string or an object, and serialize it properly for localStorage
   setPubKey(key: string | Record<string, any>) {
     const stringKey = typeof key === 'object' ? JSON.stringify(key) : key;
     localStorage.setItem('rsaPub', stringKey);
