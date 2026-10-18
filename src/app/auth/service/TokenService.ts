@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { APIResponse } from '../../model/model';
+import { APIResponse } from '../../common/model/model';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

@@ -1,7 +1,7 @@
 // auth.service.ts
 import { Injectable, signal } from '@angular/core';
 import { importJWK, importSPKI, jwtVerify } from 'jose';
-import { User } from '../../model/model';
+import { User } from '../../common/model/model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

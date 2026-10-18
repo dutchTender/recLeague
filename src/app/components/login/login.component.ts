@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../auth/service/AuthService';
 import { TokenService } from '../../auth/service/TokenService';
-import { JwtClaims } from '../../model/model';
+import { JwtClaims } from '../../common/model/model';
 
 
 

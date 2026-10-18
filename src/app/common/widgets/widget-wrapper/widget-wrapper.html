@@ -1,0 +1,17 @@
+
+<div class="widget-header">
+  <h3>{{title()}}</h3>
+  @if (isLoading()){
+    <mat-spinner
+      class="loader"
+      color="accent"
+      diameter="22"
+    >
+    </mat-spinner>
+  }
+</div>
+<ng-content></ng-content>
+<div class="widget-footer">
+  <button mat-raised-button (click)="asyncWidgetActionHandler()">{{action()}}</button>
+</div>
+
