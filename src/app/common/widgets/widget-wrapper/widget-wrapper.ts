@@ -1,4 +1,4 @@
-import { Component, contentChild, ContentChild, input, OnInit, signal } from '@angular/core';
+import { Component, contentChild,OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinner} from '@angular/material/progress-spinner';
 import { WidgetToken } from '../../model/model';
@@ -11,8 +11,8 @@ import { WidgetToken } from '../../model/model';
 })
 export class WidgetWrapper implements OnInit{
 
-  widgetContent = contentChild(WidgetToken);
   protected isLoading = signal<boolean>(false);
+  widgetContent = contentChild(WidgetToken);
   ngOnInit(): void {
   }
 
