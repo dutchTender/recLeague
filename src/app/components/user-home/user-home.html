@@ -1,9 +1,10 @@
 
 <!-- The Grid Container -->
 <div class="homepage-container">
-  <header class="main-header">
-    <h1>Welcome Back {{ currentUser()?.userName }}</h1>
-  </header>
+
+  <div class="main-header">
+    <app-header></app-header>
+  </div>
 
   <div class="side-nav">
     <app-nav-bar></app-nav-bar>
@@ -21,9 +22,9 @@
     <p>Historic</p>
   </aside>
 
-  <footer class="main-footer">
-    <p>&copy; 2026 Dashboard App</p>
-  </footer>
+  <div class="main-footer">
+    <app-footer></app-footer>
+  </div>
 
 </div>
 

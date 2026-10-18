@@ -5,10 +5,12 @@ import { AuthService } from '../../auth/service/AuthService';
 import { SocialFeed } from '../../widgets/social-feed/social-feed';
 import { WidgetWrapper } from '../../common/widgets/widget-wrapper/widget-wrapper';
 import { NavBar } from '../../common/nav/nav-bar/nav-bar';
+import { AppFooter } from '../../common/page/app-footer/app-footer';
+import { AppHeader } from '../../common/page/app-header/app-header';
 
 @Component({
   selector: 'app-user-home',
-  imports: [RouterLink, SocialFeed, WidgetWrapper, NavBar],
+  imports: [RouterLink, SocialFeed, WidgetWrapper, NavBar, AppFooter, AppHeader],
   templateUrl: './user-home.html',
   styleUrl: './user-home.css',
 })
