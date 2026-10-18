@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, WritableSignal} from '@angular/core';
 
 export interface  APIResponse {
 status?: number;
@@ -26,8 +26,8 @@ export interface JwtClaims {
 }
 
 export interface WidgetContent {
-     widgetName: string;
-     actionType: string;
+     widgetName: WritableSignal<string>;
+     actionType: WritableSignal<string>;
      executeAction() : void;
 }
 

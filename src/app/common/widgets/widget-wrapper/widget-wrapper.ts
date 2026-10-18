@@ -10,12 +10,9 @@ import { WidgetToken } from '../../model/model';
   styleUrl: './widget-wrapper.css',
 })
 export class WidgetWrapper implements OnInit{
-  title = input<string>('');
-  action = input<string>('')
-  protected isLoading = signal<boolean>(false);
 
   widgetContent = contentChild(WidgetToken);
-
+  protected isLoading = signal<boolean>(false);
   ngOnInit(): void {
   }
 

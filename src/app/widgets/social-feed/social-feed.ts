@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { WidgetContent, WidgetToken } from '../../common/model/model';
 
 @Component({
@@ -13,8 +13,8 @@ import { WidgetContent, WidgetToken } from '../../common/model/model';
   styleUrl: './social-feed.css',
 })
 export class SocialFeed implements WidgetContent, OnInit{
-  actionType: string = '';
-  widgetName: string = '';
+  actionType = signal<string>('Post')
+  widgetName = signal<string>('Social Activity Feed')
 
   executeAction(): void {
     console.log('widget action executed.')
