@@ -1,7 +1,7 @@
 import { Component, contentChild,OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinner} from '@angular/material/progress-spinner';
-import { WidgetToken } from '../../model/model';
+import { WidgetToken } from '../../model/InjectionToken';
 
 @Component({
   selector: 'app-widget-wrapper',

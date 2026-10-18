@@ -1,5 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { WidgetContent, WidgetToken } from '../../common/model/model';
+import { WidgetToken } from '../../common/model/InjectionToken';
+import { WidgetContent } from '../../common/model/model';
+
 
 @Component({
   selector: 'app-social-feed',
