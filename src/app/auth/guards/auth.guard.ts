@@ -9,8 +9,7 @@ export const authGuard: CanActivateFn = async (route, state) => {
 
   if (await authService.isAuthenticated()) {
     authService.setCurrentUserFromJWT(authService.getToken());
-    return true; // Allow navigation to the route
+    return true;
   }
-  // Redirect unauthenticated user to login
   return router.navigate(['/']);
 };
